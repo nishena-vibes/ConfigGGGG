@@ -1,0 +1,17 @@
+#!/bin/bash
+
+files=(*.$1)
+archive_name="archive.tar"
+
+if [ ${#files[@]} -eq 0 ]; then
+	echo "No files to archive!";
+	exit 1;
+fi
+
+if [ -n $2 ]; then
+	archive_name=$2
+fi
+
+tar -rf "$archive_name" "$files"
+echo "Created archive $archive_name with files: $files"
+
