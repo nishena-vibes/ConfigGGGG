@@ -13,11 +13,7 @@ class MemoryVFS:
         self.tree = {}
         self.load_error = None
         if vfs_path:
-            if os.path.exists(vfs_path):
-                self._load_from_csv(vfs_path)
-            else:
-                self.load_error = f"Error: VFS not found: {vfs_path}"
-                self._create_default()
+            self._load_from_csv(vfs_path)
         else:
             self._create_default()
 
