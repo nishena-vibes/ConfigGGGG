@@ -1,0 +1,6 @@
+path,type,content_b64
+/,dir,
+/home,dir,
+/etc,dir,
+/home/user.txt,file,dXNlcg==
+/etc/config.ini,file,W2NvbmZpZ10=

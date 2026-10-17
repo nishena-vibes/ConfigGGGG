@@ -1,2 +1,3 @@
-#!/usr/bin/env bash
-python3 main.py
+#!/bin/bash
+
+python3 src/main.py "$@"

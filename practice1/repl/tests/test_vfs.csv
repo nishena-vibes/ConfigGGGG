@@ -1,0 +1,4 @@
+path,type,content_b64
+/,dir,
+/home,dir,
+/home/user.txt,file,dXNlcg==

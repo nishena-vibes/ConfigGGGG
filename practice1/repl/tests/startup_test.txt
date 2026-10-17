@@ -1,0 +1,17 @@
+uname
+ls
+cd var
+ls
+cd log/nginx
+ls
+wc access.log
+cd ../..
+ls
+cd /home/student/docs
+touch newfile.txt
+ls
+wc newfile.txt
+rm newfile.txt
+ls
+rm nonexistent_file.txt
+uname

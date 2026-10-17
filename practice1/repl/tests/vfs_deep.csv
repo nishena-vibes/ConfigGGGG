@@ -1,0 +1,10 @@
+path,type,content_b64
+/,dir,
+/var,dir,
+/var/log,dir,
+/var/log/nginx,dir,
+/var/log/nginx/access.log,file,MTI3LjAuMC4xIC0gLSB7MjAyNi0xMC0xN30KMTI3LjAuMC4xIC0gLSB7b2t9Cg==
+/home,dir,
+/home/student,dir,
+/home/student/docs,dir,
+/home/student/docs/note.txt,file,SGVsbG8gV29ybGQhCg==
