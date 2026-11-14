@@ -45,6 +45,12 @@ def parse_arguments():
         default=None,
         help="Подстрока для фильтрации пакетов",
     )
+    parser.add_argument(
+        "--load-order",
+        action="store_true",
+        default=False,
+        help="Вывод порядка загрузки зависимостей",
+    )
     return parser.parse_args()
 
 
@@ -71,6 +77,7 @@ def validate_arguments(args):
 
     params["test_repo"] = bool(args.test_repo)
     params["ascii_tree"] = bool(args.ascii_tree)
+    params["load_order"] = bool(args.load_order)
 
     max_depth = args.max_depth
     if max_depth is None:
