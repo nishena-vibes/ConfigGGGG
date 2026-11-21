@@ -9,31 +9,6 @@ from plantuml import generate_ascii_tree, generate_plantuml
 from repo import fetch_dependencies
 from test_repo import make_test_fetch_fn, parse_test_repo_file
 
-LOAD_ORDER_NOTES = (
-    "Сравнение со штатным менеджером пакетов (Maven):\n"
-    "1. Утилита учитывает только прямые и транзитивные зависимости из POM.\n"
-    "2. Maven дополнительно применяет dependencyManagement, исключения\n"
-    "   (exclusions), optional зависимости, области видимости (scope) и\n"
-    "   медиацию версий (поближайшее определение выигрывает), что может\n"
-    "   изменить порядок загрузки и состав пакетов.\n"
-    "3. Результат утилиты может отличаться от Maven из-за отсутствия\n"
-    "   вышеуказанной логики — это ожидаемое расхождение при упрощённой\n"
-    "   реализации."
-)
-
-VISUALIZATION_NOTES = (
-    "Сравнение со штатными инструментами визуализации Maven:\n"
-    "1. Утилита генерирует PlantUML-описание графа, которое можно отрендерить\n"
-    "   в любом PlantUML-совместимом инструменте.\n"
-    "2. Maven не имеет встроенной графической визуализации графа;\n"
-    "   `mvn dependency:tree` выводит текстовое дерево, а сторонние плагины\n"
-    "   (напр. maven-dependency-graph) создают Graphviz/DOT файлы.\n"
-    "3. Расхождение: PlantUML использует свой синтаксис диаграмм, а DOT —\n"
-    "   свой. Утилита не скрывает и не дублирует версионные метки, тогда как\n"
-    "   некоторые Maven-плагины могут показывать только координаты group:artifact\n"
-    "   без версии. Это ожидаемое отличие при упрощённой реализации."
-)
-
 
 def main():
     """Точка входа приложения этапа 5."""
@@ -79,10 +54,6 @@ def main():
             deps_str = ", ".join(deps) if deps else ""
             print(f"{package} -> {deps_str}")
         print()
-
-    print(LOAD_ORDER_NOTES)
-    print()
-    print(VISUALIZATION_NOTES)
 
 
 def _make_real_fetch_fn(repo_url):
