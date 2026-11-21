@@ -1,5 +1,9 @@
 """Построение и обход графа зависимостей (этап 3)."""
 
+MIN_PACKAGE_PARTS = 2
+GROUP_IDX = 0
+ARTIFACT_IDX = 1
+
 
 class DependencyGraph:
     """Граф зависимостей пакетов."""
@@ -63,8 +67,8 @@ def _bfs_level(fetch_fn, graph, current_level, visited, max_depth,
 def normalize_package(dep):
     """Привести зависимость к ключу group:artifact."""
     parts = dep.split(":")
-    if len(parts) >= 2:
-        return f"{parts[0]}:{parts[1]}"
+    if len(parts) >= MIN_PACKAGE_PARTS:
+        return f"{parts[GROUP_IDX]}:{parts[ARTIFACT_IDX]}"
     return dep
 
 

@@ -14,20 +14,13 @@ def main():
     """Точка входа приложения этапа 5."""
     args = parse_arguments()
     params = validate_arguments(args)
-    # print_config(params) # Was used for part1
 
     if params["test_repo"]:
-        graph_data = parse_test_repo_file(params["repo"])
-        fetch_fn = make_test_fetch_fn(graph_data)
+        fetch_fn = make_test_fetch_fn(parse_test_repo_file(params["repo"]))
     else:
         fetch_fn = _make_real_fetch_fn(params["repo"])
 
-    graph = bfs_build_graph(
-        fetch_fn,
-        params["package"],
-        params["max_depth"],
-        params["filter"],
-    )
+    graph = bfs_build_graph(fetch_fn, params["package"], params["max_depth"], params["filter"])
 
     if not graph.all_packages():
         print(f"Зависимости для {params['package']} не найдены")
@@ -51,8 +44,7 @@ def main():
         print(f"Граф зависимостей для {params['package']}:")
         for package in sorted(graph.all_packages()):
             deps = sorted(graph.neighbors(package))
-            deps_str = ", ".join(deps) if deps else ""
-            print(f"{package} -> {deps_str}")
+            print(f"{package} -> {', '.join(deps) if deps else ''}")
         print()
 
 

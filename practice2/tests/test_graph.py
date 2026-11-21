@@ -9,7 +9,7 @@ from graph import bfs_build_graph, DependencyGraph, normalize_package
 from test_repo import make_test_fetch_fn, parse_test_repo_file
 
 
-class _FixedDepthError(Exception):
+class FixedDepthError(Exception):
     pass
 
 
@@ -78,7 +78,6 @@ class TestBfsBuildGraph(unittest.TestCase):
         self.assertEqual(graph.neighbors("A"), {"B", "C"})
         self.assertEqual(graph.neighbors("B"), {"D"})
         self.assertEqual(graph.neighbors("C"), {"D"})
-        # D посещён один раз
         self.assertIn("D", graph.all_packages())
 
 

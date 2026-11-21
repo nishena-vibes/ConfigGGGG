@@ -43,7 +43,7 @@ POM_XML = b"""<?xml version="1.0"?>
 """
 
 
-class _FakeResponse:
+class FakeResponse:
     def __init__(self, data):
         self._data = data
 
@@ -63,7 +63,7 @@ class TestRepo(unittest.TestCase):
     @patch("repo.urlopen")
     def test_fetch_dependencies_with_version(self, mock_urlopen):
         """Явно заданная версия загружает соответствующий POM."""
-        mock_urlopen.return_value = _FakeResponse(POM_XML)
+        mock_urlopen.return_value = FakeResponse(POM_XML)
         deps = fetch_dependencies(
             "https://repo.example.com/maven2", "org.example:lib:1.2"
         )
@@ -76,8 +76,8 @@ class TestRepo(unittest.TestCase):
 
         def side_effect(url, timeout=10):
             if "maven-metadata" in url:
-                return _FakeResponse(METADATA_XML)
-            return _FakeResponse(POM_XML)
+                return FakeResponse(METADATA_XML)
+            return FakeResponse(POM_XML)
 
         mock_urlopen.side_effect = side_effect
         deps = fetch_dependencies(

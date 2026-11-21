@@ -11,23 +11,13 @@ from cli import validate_arguments
 class FakeArgs:
     """Заглушка аргументов argparse для тестов."""
 
-    def __init__(
-        self,
-        package,
-        repo,
-        test_repo,
-        ascii_tree,
-        max_depth,
-        filter_sub,
-        load_order,
-    ):
-        self.package = package
-        self.repo = repo
-        self.test_repo = test_repo
-        self.ascii_tree = ascii_tree
-        self.max_depth = max_depth
-        self.filter = filter_sub
-        self.load_order = load_order
+    def __init__(self, *values):
+        for name, value in zip(
+            ("package", "repo", "test_repo", "ascii_tree", "max_depth",
+             "filter", "load_order"),
+            values,
+        ):
+            setattr(self, name, value)
 
 
 class TestValidateArguments(unittest.TestCase):
