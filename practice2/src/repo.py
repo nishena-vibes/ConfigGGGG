@@ -49,11 +49,15 @@ def resolve_latest_version(repo_url, group_id, artifact_id):
         print(f"Error: не удалось получить метаданные: {error}")
         sys.exit(1)
     root = ET.fromstring(data)
-    versioning = root.find("m:versioning", POM_NAMESPACE)
+    versioning = root.find("versioning")
+    if versioning is None:
+        versioning = root.find("m:versioning", POM_NAMESPACE)
     if versioning is None:
         print("Error: метаданные не содержат версии")
         sys.exit(1)
-    latest = versioning.find("m:latest", POM_NAMESPACE)
+    latest = versioning.find("latest")
+    if latest is None or not latest.text:
+        latest = versioning.find("m:latest", POM_NAMESPACE)
     if latest is None or not latest.text:
         print("Error: не найдена последняя версия")
         sys.exit(1)

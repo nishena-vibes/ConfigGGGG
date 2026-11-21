@@ -14,7 +14,7 @@ def main():
     """Точка входа приложения этапа 5."""
     args = parse_arguments()
     params = validate_arguments(args)
-    print_config(params)
+    # print_config(params) # Was used for part1
 
     if params["test_repo"]:
         graph_data = parse_test_repo_file(params["repo"])
