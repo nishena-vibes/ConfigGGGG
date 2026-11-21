@@ -20,7 +20,11 @@ def main():
     else:
         fetch_fn = _make_real_fetch_fn(params["repo"])
 
-    graph = bfs_build_graph(fetch_fn, params["package"], params["max_depth"], params["filter"])
+    graph = bfs_build_graph(
+        fetch_fn, params["package"],
+        params["max_depth"],
+        params["filter"],
+    )
 
     if not graph.all_packages():
         print(f"Зависимости для {params['package']} не найдены")

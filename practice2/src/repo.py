@@ -1,7 +1,7 @@
 """Получение прямых зависимостей Maven-пакета из репозитория (этап 2)."""
 
 import sys
-import xml.etree.ElementTree as Et
+import xml.etree.ElementTree as et
 from urllib.error import HTTPError, URLError
 from urllib.request import urlopen
 
@@ -48,7 +48,7 @@ def resolve_latest_version(repo_url, group_id, artifact_id):
     except (URLError, HTTPError) as error:
         print(f"Error: не удалось получить метаданные: {error}")
         sys.exit(1)
-    root = Et.fromstring(data)
+    root = et.fromstring(data)
     versioning = root.find("versioning")
     if versioning is None:
         versioning = root.find("m:versioning", POM_NAMESPACE)
@@ -80,8 +80,8 @@ def fetch_pom_text(url):
 def extract_dependencies(pom_text):
     """Извлекает прямые зависимости из текста POM."""
     try:
-        root = Et.fromstring(pom_text)
-    except Et.ParseError as error:
+        root = et.fromstring(pom_text)
+    except et.ParseError as error:
         print(f"Error: некорректный XML POM: {error}")
         sys.exit(1)
     dependencies = []

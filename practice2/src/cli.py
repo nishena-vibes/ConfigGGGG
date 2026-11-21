@@ -11,19 +11,19 @@ def parse_arguments():
     )
     args_spec = [
         ("--package", {"type": str, "default": None,
-                       "help": "Имя анализируемого пакета"}),
+            "help": "Имя анализируемого пакета"}),
         ("--repo", {"type": str, "default": None,
-                    "help": "URL репозитория или путь к файлу тестового репозитория"}),
+            "help": "URL репозитория или путь к файлу тестового репозитория"}),
         ("--test-repo", {"action": "store_true", "default": False,
-                         "help": "Режим работы с тестовым репозиторием"}),
+            "help": "Режим работы с тестовым репозиторием"}),
         ("--ascii-tree", {"action": "store_true", "default": False,
-                          "help": "Вывод зависимостей в виде ASCII-дерева"}),
+            "help": "Вывод зависимостей в виде ASCII-дерева"}),
         ("--max-depth", {"type": int, "default": None,
-                         "help": "Максимальная глубина анализа зависимостей"}),
+            "help": "Максимальная глубина анализа зависимостей"}),
         ("--filter", {"type": str, "default": None,
-                      "help": "Подстрока для фильтрации пакетов"}),
+            "help": "Подстрока для фильтрации пакетов"}),
         ("--load-order", {"action": "store_true", "default": False,
-                          "help": "Вывод порядка загрузки зависимостей"}),
+            "help": "Вывод порядка загрузки зависимостей"}),
     ]
     for name, kwargs in args_spec:
         parser.add_argument(name, **kwargs)
@@ -53,7 +53,9 @@ def _validate_max_depth(value, params, errors):
     if value is None:
         _add_error(errors, "max-depth: не задан")
     elif value < 1:
-        _add_error(errors, "max-depth: должно быть целым числом >= 1")
+        _add_error(
+            errors, "max-depth: должно быть целым числом >= 1"
+        )
     else:
         params["max_depth"] = value
 
@@ -83,8 +85,11 @@ def validate_arguments(args):
     _validate_required(args.package, "package", params, errors)
     _validate_required(args.repo, "repo", params, errors)
 
-    params.update(test_repo=bool(args.test_repo), ascii_tree=bool(args.ascii_tree),
-                  load_order=bool(args.load_order))
+    params.update(
+        test_repo=bool(args.test_repo),
+        ascii_tree=bool(args.ascii_tree),
+        load_order=bool(args.load_order),
+    )
 
     _validate_max_depth(args.max_depth, params, errors)
     _validate_filter(args.filter, params, errors)
